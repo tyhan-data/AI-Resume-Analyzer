@@ -12,9 +12,9 @@ from nltk.tokenize import word_tokenize
 # --- NLTK RESOURCES ---
 @st.cache_resource
 def download_nltk_data():
-    nltk.download('stopwords')
-    nltk.download('punkt')
-    nltk.download('averaged_perceptron_tagger')
+   nltk.download('punkt')
+   nltk.download('punkt_tab')
+   nltk.download('stopwords')
 
 download_nltk_data()
 
