@@ -1,4 +1,4 @@
-# 📄 AI Resume Analyzer
+# 📄 AI Resume Analyzer v2
 
 An intelligent resume analysis tool powered by AI that provides comprehensive feedback on your resume, covering formatting, content quality and career impact.
 
@@ -23,10 +23,16 @@ An intelligent resume analysis tool powered by AI that provides comprehensive fe
 ## 🛠️ Installation
 
 ### Prerequisites
+
+#### For Local Setup
 - Python 3.8 or higher
 - pip (Python package manager)
 
-### Setup
+#### For Docker Setup
+- Docker
+- Docker Compose (optional)
+
+### Local Setup
 
 1. **Clone the repository**
    ```bash
@@ -45,35 +51,118 @@ An intelligent resume analysis tool powered by AI that provides comprehensive fe
    pip install -r requirements.txt
    ```
 
-4. **Set up environment variables**
-   Create a `.env` file in the root directory with your API keys:
-   ```
-   OPENAI_API_KEY=your_api_key_here
-   ```
-
-5. **Run the application**
+4. **Run the application**
    ```bash
    streamlit run app.py
    ```
 
-6. **Access the app**
+5. **Access the app**
    Open your browser and navigate to `http://localhost:8501`
 
+---
+
+## 🐳 Docker Setup
+
+### Using Docker Hub
+
+The easiest way to get started is to pull the pre-built image from Docker Hub:
+
+**Docker Hub Repository**: [tyhan55/ai-resume-analyzer](https://hub.docker.com/r/tyhan55/ai-resume-analyzer)
+
+#### Quick Start with Docker
+
+1. **Pull the image**
+   ```bash
+   docker pull tyhan55/ai-resume-analyzer:v2
+   ```
+
+2. **Run the container**
+   ```bash
+   docker run -p 8501:8501 tyhan55/ai-resume-analyzer:v2
+   ```
+
+3. **Access the application**
+   Open your browser and navigate to `http://localhost:8501`
+
+#### Advanced Docker Configuration
+
+Mount volumes for data persistence:
+```bash
+docker run -p 8501:8501 \
+  -v $(pwd)/uploads:/app/uploads \
+  tyhan55/ai-resume-analyzer:v2
+```
+
+### Building Docker Image Locally
+
+1. **Build the image**
+   ```bash
+   docker build -t ai-resume-analyzer:v2 .
+   ```
+
+2. **Run the container**
+   ```bash
+   docker run -p 8501:8501 ai-resume-analyzer:v2
+   ```
+
+### Using Docker Compose
+
+Create a `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+
+services:
+  ai-resume-analyzer:
+    image: tyhan55/ai-resume-analyzer:v2
+    container_name: ai-resume-analyzer
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+```
+
+Then run:
+```bash
+docker-compose up -d
+```
+
+To stop the container:
+```bash
+docker-compose down
+```
+
+### Docker Port Configuration
+
+| Port | Service | Description |
+|------|---------|-------------|
+| `8501` | Streamlit | Web application |
+
+---
+
 ## 📖 Usage
+
+### Web Interface
 
 1. **Upload or Paste Your Resume**: Choose to upload a PDF/DOCX file or paste your resume text
 2. **Select Analysis Type**: Choose between quick analysis or comprehensive review
 3. **Get Instant Feedback**: Receive detailed insights and recommendations
 4. **Download Report**: Export your analysis results as a PDF (optional)
 
+---
+
 ## 📁 Project Structure
 
 ```
 AI-Resume-Analyzer/
 │
+├── app.py
 ├── resume_analyzer.py
 ├── requirements.txt
-├── README.md
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
 ```
 
 ## 🤖 Technology Stack
@@ -82,14 +171,14 @@ AI-Resume-Analyzer/
 - **Streamlit**: Web application framework
 - **PyPDF2**: PDF file parsing
 - **pandas**: Data processing and analysis
-
+- **Docker**: Containerization and deployment
 
 ## 📊 How It Works
 
 1. **Resume Parsing**: Extracts text from uploaded PDF, DOCX, or plain text
 2. **Content Analysis**: Uses AI to evaluate resume content, structure, and impact
-4. **Scoring Algorithm**: Generates a comprehensive score based on multiple factors
-5. **Report Generation**: Presents actionable feedback and recommendations
+3. **Scoring Algorithm**: Generates a comprehensive score based on multiple factors
+4. **Report Generation**: Presents actionable feedback and recommendations
 
 ## 💡 Tips for Best Results
 
@@ -121,6 +210,7 @@ If you encounter any issues or have questions:
 1. Check the [Issues](https://github.com/tyhan-data/AI-Resume-Analyzer/issues) page
 2. Create a new issue with detailed information
 3. Include steps to reproduce the problem
+4. Check the [Docker Hub documentation](https://hub.docker.com/r/tyhan55/ai-resume-analyzer)
 
 ## 🌟 Show Your Support
 
@@ -134,6 +224,8 @@ If you find this tool helpful, please consider:
 ## 📚 Additional Resources
 
 - [Streamlit Documentation](https://docs.streamlit.io/)
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Hub - AI Resume Analyzer](https://hub.docker.com/r/tyhan55/ai-resume-analyzer)
 - [Resume Best Practices](https://www.indeed.com/career-advice/resumes)
 
 ## 👨‍💻 Author
